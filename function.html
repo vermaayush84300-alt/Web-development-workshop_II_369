@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function</title>
+</head>
+
+<body>
+    <h1>USE OF FUNCTION</h1>
+    <div class="container">
+        <h2>click to check</h2>
+        <input type="number" id="num">
+        <button onclick="clickNumber()">click</button>
+        <p id="numbers">The given number is: </p>
+    </div>
+    <script>
+        function clickNumber() {
+            let n = parseInt(document.getElementById("num").value);
+            let sum = 0;
+            for (let i = 1; i <= n; i++) {
+                sum += i;
+            }
+            document.getElementById("numbers").innerHTML = "The given number is: " + sum;
+        }
+
+    </script>
+</body>
+
+</html>
