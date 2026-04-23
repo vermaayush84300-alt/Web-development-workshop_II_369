@@ -22,20 +22,14 @@
 
             let resultText = "";
             let numbersText = "";
-
-            // Check even or odd (Conditional Statement)
             if (n % 2 === 0) {
                 resultText = "The number is Even";
             } else {
                 resultText = "The number is Odd";
             }
-
-            // Loop from 1 to n
             for (let i = 1; i <= n; i++) {
                 numbersText += i + " ";
             }
-
-            // Display output
             document.getElementById("result").innerHTML = resultText;
             document.getElementById("numbers").innerHTML = numbersText;
         }

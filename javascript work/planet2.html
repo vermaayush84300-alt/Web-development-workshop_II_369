@@ -9,16 +9,18 @@
     <style>
         body {
             margin: 0;
-            background: black;
+            background: radial-gradient(circle, #000428, #004e92);
             overflow: hidden;
             font-family: Arial, sans-serif;
             color: white;
         }
+
         .solar-system {
             position: relative;
             width: 100vw;
             height: 100vh;
         }
+
         .sun {
             position: absolute;
             top: 50%;
@@ -149,6 +151,7 @@
 
         /* 🌙 Moon */
         .moon-orbit {
+           
             width: 50px;
             height: 50px;
             position: absolute;
@@ -170,7 +173,6 @@
             border-radius: 50%;
         }
 
-        /* 🔄 Animation */
         @keyframes rotate {
             from {
                 transform: translate(-50%, -50%) rotate(0deg);
@@ -181,26 +183,7 @@
             }
         }
 
-        /* 🎮 Controls */
-        .controls {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-        }
-
-        #infoBox {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
-            border-radius: 10px;
-            width: 250px;
-        }
-
-        .highlight {
-            box-shadow: 0 0 20px white;
-        }
+        
     </style>
 </head>
 
@@ -248,14 +231,14 @@
         Speed: <input type="range" min="1" max="10" value="1" id="speedControl">
     </div>
 
-   
+
     <div id="infoBox">
         <h3 id="planetName">Click a Planet</h3>
         <p id="planetInfo"></p>
     </div>
 
-    <script>
-        
+    <!-- <script>
+
         const planetData = {
             mercury: "Closest to Sun.",
             venus: "Hottest planet.",
@@ -293,7 +276,7 @@
                 o.style.animationDuration = (20 / speed) + "s";
             });
         });
-    </script>
+    </script> -->
 
 </body>
 
