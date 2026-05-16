@@ -62,11 +62,11 @@
 // let evenNumbers = numbers.filter(num => num % 2 === 0);
 // console.log(evenNumbers);
 
-// // reduce on array
+// reduce on array
 
-// let sum = [1, 2, 3, 4, 5];
-// let total = sum.reduce((acc, num) => acc + num, 0);
-// console.log(total);
+let sum = [1, 2, 3, 4, 5];
+let total = sum.reduce((acc, num) => acc + num, 0);
+console.log(total);
 
 let students = [
     { name: "Alice", score: 85 },
@@ -88,3 +88,8 @@ console.log(topstudent);
 let totalMarks = students.reduce((acc, student) => acc + student.score, 0);
 let averageMarks = totalMarks / students.length;
 console.log(averageMarks);
+
+// filter on array
+
+let highScorers = students.filter(student => student.score >= 80);
+console.log(highScorers);
