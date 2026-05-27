@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>check even or odd</title>
+</head>
+<style>
+    body {
+        background-color: rgb(248, 243, 243);
+        font-family: Arial, sans-serif;
+
+    }
+
+    h1 {
+        text-align: center;
+        color: rgb(19, 18, 18);
+    }
+
+    h2 {
+        color: rgb(245, 245, 249);
+    }
+
+    .container {
+        margin-top: 50px;
+        background-color: rgb(19, 18, 18);
+        width: 300px;
+        padding: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: blue;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background-color: darkblue;
+    }
+
+    p {
+        margin-top: 20px;
+        font-size: 18px;
+        color: rgb(245, 245, 249);
+    }
+</style>
+
+<body>
+    <h1>Even or Odd Checker</h1>
+    <div class="container">
+        <h2>Enter the number</h2>
+        <input type="number" id="num">
+        <button class="btn" onclick="checkNumber()">Check</button>
+        <p id="result"></p>
+        <p id="number"></p>
+    </div>
+    <script>
+        function checkNumber() {
+            let n = document.getElementById("num").value;
+            let resultText = "";
+            let numberText = "";
+            if (n % 2 === 0) {
+                resultText = "Even Number";
+            }
+            else {
+                resultText = "Odd number";
+            }
+
+            for (let i = 1; i <= n; i++) {
+
+                numberText += i + " ";
+            }
+            document.getElementById("result").innerHTML = resultText;
+            document.getElementById("number").innerHTML = numberText;
+
+        }
+    </script>
+</body>
+
+</html>

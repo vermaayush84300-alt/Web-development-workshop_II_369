@@ -1,0 +1,172 @@
+body {
+      background-color: black;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .sun {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      width: 70px;
+      height: 70px;
+      margin-left: -50px;
+      margin-top: -50px;
+      background: radial-gradient(circle, #f9f919, rgb(247, 167, 6), rgb(233, 246, 112));
+      border-radius: 50%;
+      box-shadow: 0 0 50px rgb(241, 230, 8);
+    }
+
+    .orbit {
+      position: absolute;
+      top: 10%;
+      left: 10%;
+      border: 1px dashed rgba(25, 255, 255, 0.001);
+      border-radius: 0%;
+      transform: translate(-50%, -50%);
+    }
+
+    .planet {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 70%;
+      transform-origin: -50% center;
+    }
+
+    .planet::before {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .mercury {
+      width: 120px;
+      height: 120px;
+      animation: rotate  6s linear infinite;
+    }
+    .mercury::before {
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle, #f9f919, rgb(247, 167, 6), rgb(233, 246, 112));
+      border-radius: 50%;
+      top: 55px;
+      left: 110px;
+    }
+
+    .venus {
+      width: 160px;
+      height: 160px;
+      animation: rotate 10s linear infinite;
+    }
+    .venus::before {
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #f91955, rgb(247, 6, 46), rgb(233, 246, 112));
+      border-radius: 50%;
+      top: 73px;
+      left: 145px;
+    }
+
+    .earth {
+      width: 200px;
+      height: 200px;
+      animation: rotate  14s linear infinite;
+    }
+    .earth::before {
+      width: 30px;
+      height: 30px;
+      background: radial-gradient(circle, #5119f9, rgb(6, 102, 247), rgb(112, 170, 246));
+      border-radius: 50%;
+      top: 92px;
+      left: 180px;
+    }
+    .moon {
+      width: 60px;
+      height: 60px;
+      animation: rotate 4s linear infinite;
+    }
+    .moon::before {
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      top: 26px;
+      left: 52px;
+    }
+
+    .mars {
+      width: 240px;
+      height: 240px;
+      animation: rotate  20s linear infinite;
+    }
+    .mars::before {
+      width: 25px;
+      height: 25px;
+      background: radial-gradient(circle, #f94919, rgb(247, 90, 6), rgb(246, 114, 112));
+      border-radius: 50%;
+      top: 114px;
+      left: 215px;
+    }
+
+    .jupiter {
+      width: 280px;
+      height: 280px;
+      animation: rotate 25s linear infinite;
+    }
+    .jupiter::before {
+      width: 50px;
+      height: 50px;
+      background: radial-gradient(circle, #e0b263, rgb(241, 205, 132), rgb(242, 215, 109));
+      border-radius: 50%;
+      top: 128px;
+      left: 250px;
+    }
+
+    .saturn {
+      width: 320px;
+      height: 320px;
+      animation: rotate 30s linear infinite;
+    }
+    .saturn::before {
+      width: 40px;
+      height: 40px;
+      background: rgb(217, 231, 18);
+      top: 150px;
+      left: 285px;
+    }
+
+    .uranus {
+      width: 360px;
+      height: 360px;
+      animation: rotate 39s linear infinite;
+    }
+    .uranus::before {
+      width: 37px;
+      height: 37px;
+      background: rgb(5, 117, 117);
+      top: 170px;
+      left: 320px;
+    }
+
+    .neptune {
+      width: 400px;
+      height: 400px;
+      animation: rotate 40s linear infinite;
+    }
+    .neptune::before {
+      width: 35px;
+      height: 35px;
+      background: aqua;
+      top: 190px;
+      left: 355px;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
