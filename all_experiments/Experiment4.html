@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 4</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+        }
+
+        .container {
+            text-align: center;
+            border: 1px solid #565353;
+            padding: 20px;
+            margin-top: 200px;
+            background-color: #f2f2f2;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+        }
+
+        input {
+            margin: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #48c92b;
+            color: white;
+            display: flex;
+            margin-left: 140px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #2e7d1e;
+        }
+
+        p {
+            margin: 10px;
+            font-size: 18px;
+            font-weight: bold;
+
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+        <h1>Student Result Calculator</h1>
+        <h2>Enter Number of Subjects</h2>
+        <input type="number" id="num" placeholder="Enter the no of subjects">
+        <button onclick="averageNumber() ">Calculate Result</button>
+        <p id="totalMarks"></p>
+        <p id="averageMarks"></p>
+        <p id="percentage"></p>
+        <p id="grade"></p>
+        <p id="result"></p>
+
+    </div>
+
+    <script>
+
+        function averageNumber() {
+            let n = Number(document.getElementById("num").value);
+            let totalMarks = 0;
+            for (let i = 0; i < n; i++) {
+                let marks = Number(prompt("Enter the marks of subjects"));
+                totalMarks += marks;
+            }
+            document.getElementById("totalMarks").innerHTML = "Total Marks: " + totalMarks;
+            let averageMarks = totalMarks / n;
+            document.getElementById("averageMarks").innerHTML = "Average Marks: " + averageMarks.toFixed(2);
+            let percentage = (totalMarks / (n * 100)) * 100;
+            document.getElementById("percentage").innerHTML = "Percentage: " + percentage.toFixed(2) + "%";
+            let grade = "";
+            let result = "";
+            if (averageMarks >= 90) {
+                grade = "A+";
+                result = "Excellent";
+            }
+            else if (averageMarks >= 80) {
+                grade = "A";
+                result = "Very Good";
+            }
+            else if (averageMarks >= 70) {
+                grade = "B+";
+                result = "Good";
+            }
+            else if (averageMarks >= 60) {
+                grade = "B";
+                result = "Satisfactory";
+            }
+            else if (averageMarks >= 50) {
+                grade = "C+";
+                result = "Pass";
+            }
+            else {
+                grade = "F";
+                result = "Fail";
+            }
+            document.getElementById("grade").innerHTML = "Grade: " + grade;
+            document.getElementById("result").innerHTML = "Result: " + result;
+        }
+
+    </script>
+</body>
+
+</html>
