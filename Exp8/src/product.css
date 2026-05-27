@@ -1,0 +1,90 @@
+body {
+    margin: 0px;
+    padding: 0;
+    font-family: Arial, sans-serif
+}
+
+
+.container {
+    display: flex;
+    text-align: center;
+    padding: 60px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    width: 100%;
+    font-size: 50px;
+    text-align: center;
+    color: #91270a;
+    margin-bottom: 50px;
+    font-weight: bold;
+
+}
+
+.card h2 {
+    font-size: 24px;
+    color: #7a04f8;
+    margin-bottom: 10px;
+}
+
+.studentCard h2 {
+    font-size: 24px;
+    color: #087418;
+    margin-bottom: 10px;
+}
+
+.marksCard h2 {
+    font-size: 24px;
+    color: #f60808;
+    margin-bottom: 10px;
+}
+
+.card {
+    width: 300px;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #a098fb;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid #5806f2;
+}
+
+.studentCard {
+    width: 300px;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #b7f787;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid #0e5511;
+}
+
+.marksCard {
+    width: 300px;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #f79c9c;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid #f60808;
+}
+
+p {
+    font-size: 18px;
+    margin: 5px 0;
+    color: white;
+}
