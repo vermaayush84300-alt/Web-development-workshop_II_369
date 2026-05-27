@@ -1,29 +1,60 @@
-.container {
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    background: #fff;
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.12);
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 760px;
     text-align: center;
-    margin-top: 100px;
-    font-family: Arial;
 }
 
 h1 {
-    font-size: 40px;
+    margin-bottom: 18px;
+    font-size: 2.2rem;
 }
 
-h2 {
-    font-size: 50px;
-    margin: 20px;
+#textInput {
+    width: 370px;
+    padding: 10px 14px;
+    font-size: 1rem;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    margin-bottom: 20px;
 }
 
-.buttons button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 20px;
-    cursor: pointer;
-    border-radius: 8px;
-    border: none;
-    background-color: #007bff;
+.btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.btn {
+    background: #1e88e5;
     color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    min-width: 150px;
 }
 
-.buttons button:hover {
-    background-color: #0056b3;
+.btn:hover {
+    filter: brightness(1.1);
+}
+
+#paragraph {
+    font-size: 1.2rem;
+    color: #242424;
+    margin-top: 16px;
 }
