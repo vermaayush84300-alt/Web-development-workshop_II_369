@@ -1,0 +1,7 @@
+# Dependency directories
+node_modules/
+
+# Local/system files
+powershell.cmd
+.DS_Store
+Thumbs.db

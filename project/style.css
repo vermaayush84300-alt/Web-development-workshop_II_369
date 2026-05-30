@@ -419,8 +419,7 @@ hr {
         font-size: 12px;
     }
 
-    /* HERO SECTION */
-    .hero-section {
+    HERO SECTION */ .hero-section {
         height: 200px;
         background-position: center;
     }
@@ -433,7 +432,7 @@ hr {
         text-align: center;
     }
 
-    /* CONTENT BOXES */
+
     .content-section {
         padding: 10px;
         grid-template-columns: 1fr;
@@ -444,7 +443,7 @@ hr {
 
     }
 
-    /* FOOTER */
+
     .footer-top {
         flex-direction: column;
         align-items: center;
