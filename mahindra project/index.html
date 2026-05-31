@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahindra Automotive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --red: #C8102E;
+            --red-dark: #9e0c23;
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-50: #f8f8f6;
+            --gray-100: #f0efeb;
+            --gray-200: #dddcd7;
+            --gray-400: #9a9890;
+            --gray-600: #5c5b56;
+            --gray-800: #2a2a27;
+            --font-display: 'Bebas Neue', cursive;
+            --font-cond: 'Barlow Condensed', sans-serif;
+            --font-body: 'Barlow', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--white);
+            color: var(--black);
+            overflow-x: hidden
+        }
+
+        /* ── NAVBAR ── */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 48px;
+            height: 68px;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(200, 16, 46, 0.3);
+            transition: all 0.3s ease;
+        }
+        .navbar.light {
+            background: rgba(255, 255, 255, 0.97);
+            border-bottom-color: rgba(0, 0, 0, 0.1)
+        }
+
+        .navbar.light .menu p,
+        .navbar.light .nav-icon {
+            color: var(--black)
+        }
+
+        .navbar.light .logo-text {
+            color: var(--black)
+        }
+
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .logo-wrap img {
+            height: 36px;
+            width: auto;
+            filter: brightness(0) invert(1)
+        }
+
+        .navbar.light .logo-wrap img {
+            filter: none
+        }
+
+        .logo-text {
+            font-family: var(--font-cond);
+            font-size: 13px;
+            letter-spacing: 0.2em;
+            color: var(--white);
+            text-transform: uppercase;
+            opacity: 0.7
+        }
+
+        .menu {
+            display: flex;
+            gap: 32px;
+            list-style: none
+        }
+
+        .menu p {
+            font-family: var(--font-cond);
+            font-size: 14px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--white);
+            cursor: pointer;
+            position: relative;
+            padding-bottom: 2px;
+            transition: color 0.2s;
+        }
+
+        .menu p::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--red);
+            transition: width 0.25s ease
+        }
+
+        .menu p:hover::after,
+        .menu p.active::after {
+            width: 100%
+        }
+
+        .menu p:hover {
+            color: var(--red)
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px
+        }
+
+        .nav-icon {
+            color: var(--white);
+            font-size: 18px;
+            cursor: pointer;
+            transition: color 0.2s
+        }
+
+        .nav-icon:hover {
+            color: var(--red)
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--white);
+            transition: all 0.3s ease;
+            transform-origin: center
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg)
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0)
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg)
+        }
+
+        /* Mobile nav drawer */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 68px;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.97);
+            backdrop-filter: blur(16px);
+            padding: 24px 24px 32px;
+            z-index: 999;
+            border-bottom: 2px solid var(--red);
+            transform: translateY(-8px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .mobile-menu.open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: all
+        }
+
+        .mobile-menu p {
+            font-family: var(--font-cond);
+            font-size: 22px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--white);
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            cursor: pointer;
+            transition: color 0.2s, padding-left 0.2s;
+        }
+
+        .mobile-menu p:hover {
+            color: var(--red);
+            padding-left: 8px
+        }
+
+        /* ── HERO ── */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            background: linear-gradient(135deg, var(--black) 0%, #1a0a0d 50%, #0d0005 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 0 48px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 60% at 65% 40%, rgba(200, 16, 46, 0.18) 0%, transparent 70%);
+        }
+
+        .hero-bg-text {
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--font-display);
+            font-size: min(28vw, 320px);
+            color: rgba(255, 255, 255, 0.03);
+            line-height: 1;
+            pointer-events: none;
+            letter-spacing: -0.02em;
+            white-space: nowrap;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px
+        }
+
+        .hero-tag {
+            font-family: var(--font-cond);
+            font-size: 12px;
+            letter-spacing: 0.3em;
+            color: var(--red);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-tag::before {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 1px;
+            background: var(--red)
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: min(10vw, 120px);
+            color: var(--white);
+            line-height: 0.9;
+            letter-spacing: 0.01em;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 span {
+            color: var(--red)
+        }
+
+        .hero p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.55);
+            max-width: 480px;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--red);
+            color: var(--white);
+            font-family: var(--font-cond);
+            font-size: 13px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 14px 32px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 100%, 0 100%);
+        }
+
+        .btn-primary:hover {
+            background: var(--red-dark);
+            transform: translateX(4px)
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--white);
+            font-family: var(--font-cond);
+            font-size: 13px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding-bottom: 2px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            color: var(--red);
+            border-bottom-color: var(--red)
+        }
+
+        /* ── SECTION HEADER ── */
+        .section-header {
+            text-align: center;
+            padding: 72px 48px 48px
+        }
+
+        .section-tag {
+            font-family: var(--font-cond);
+            font-size: 11px;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 12px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-display);
+            font-size: min(8vw, 80px);
+            color: var(--black);
+            letter-spacing: 0.02em;
+            line-height: 1;
+        }
+
+        /* ── ABOUT BAND ── */
+        .about-band {
+            background: var(--black);
+            padding: 56px 48px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .about-band h2 {
+            font-family: var(--font-display);
+            font-size: 52px;
+            color: var(--white);
+            letter-spacing: 0.02em;
+            line-height: 1.05;
+        }
+
+        .about-band h2 span {
+            color: var(--red)
+        }
+
+        .about-band p {
+            font-size: 15px;
+            line-height: 1.75;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 300;
+        }
+
+        /* ── VEHICLE GRID ── */
+        .vehicles-section {
+            padding: 0 48px 72px;
+            background: var(--gray-50)
+        }
+
+        .vehicle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2px;
+        }
+
+        .vehicle-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            background: var(--gray-200);
+        }
+
+        .vehicle-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: block;
+        }
+
+        .vehicle-card:hover img {
+            transform: scale(1.08)
+        }
+
+        .vehicle-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.1) 55%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: all 0.35s ease;
+        }
+
+        .vehicle-card:hover .vehicle-overlay {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .vehicle-overlay h3 {
+            font-family: var(--font-cond);
+            font-size: 22px;
+            letter-spacing: 0.06em;
+            color: var(--white);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .vehicle-overlay p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.4
+        }
+
+        .vehicle-overlay .card-cta {
+            margin-top: 12px;
+            font-family: var(--font-cond);
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            color: var(--red);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ── STATS STRIP ── */
+        .stats-strip {
+            background: var(--red);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .stat-item {
+            padding: 48px 32px;
+            text-align: center;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item:last-child {
+            border-right: none
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.4);
+            transition: width 0.4s ease;
+        }
+
+        .stat-item:hover::before {
+            width: 80%
+        }
+
+        .stat-num {
+            font-family: var(--font-display);
+            font-size: 60px;
+            color: var(--white);
+            letter-spacing: 0.02em;
+            line-height: 1;
+            display: block;
+        }
+
+        .stat-label {
+            font-family: var(--font-cond);
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            margin-top: 6px;
+            display: block;
+        }
+
+        /* ── NEWS SECTION ── */
+        .news-section {
+            padding: 0 48px 80px;
+            background: var(--white)
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .news-card {
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .news-card:hover {
+            border-color: var(--red);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(200, 16, 46, 0.12)
+        }
+
+        .news-card img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease
+        }
+
+        .news-card:hover img {
+            transform: scale(1.04)
+        }
+
+        .news-body {
+            padding: 20px
+        }
+
+        .news-tag {
+            font-family: var(--font-cond);
+            font-size: 10px;
+            letter-spacing: 0.25em;
+            color: var(--red);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .news-body h3 {
+            font-family: var(--font-cond);
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.35;
+            color: var(--black);
+            margin-bottom: 10px;
+            letter-spacing: 0.02em;
+        }
+
+        .news-body p {
+            font-size: 13px;
+            color: var(--gray-600);
+            line-height: 1.6
+        }
+
+        .news-body .read-more {
+            margin-top: 14px;
+            font-family: var(--font-cond);
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            color: var(--red);
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ── MODAL ── */
+        .modal-bg {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-bg.open {
+            opacity: 1;
+            pointer-events: all
+        }
+
+        .modal {
+            background: var(--white);
+            max-width: 840px;
+            width: 100%;
+            max-height: 92vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(24px) scale(0.97);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .modal-bg.open .modal {
+            transform: translateY(0) scale(1)
+        }
+
+        .modal-img {
+            width: 100%;
+            aspect-ratio: 16/7;
+            object-fit: cover;
+            display: block
+        }
+
+        .modal-body {
+            padding: 32px 36px 40px
+        }
+
+        .modal-tag {
+            font-family: var(--font-cond);
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            color: var(--red);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .modal-body h2 {
+            font-family: var(--font-display);
+            font-size: 42px;
+            letter-spacing: 0.02em;
+            color: var(--black);
+            line-height: 1.05;
+            margin-bottom: 16px;
+        }
+
+        .modal-body p {
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--gray-600)
+        }
+
+        .modal-specs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 28px 0;
+            padding: 24px;
+            background: var(--gray-50);
+        }
+
+        .spec-item label {
+            font-family: var(--font-cond);
+            font-size: 10px;
+            letter-spacing: 0.25em;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .spec-item span {
+            font-family: var(--font-cond);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--black)
+        }
+
+        .modal-close {
+            position: sticky;
+            top: 16px;
+            float: right;
+            width: 40px;
+            height: 40px;
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            z-index: 10;
+            margin: 16px 16px -56px auto;
+            transition: background 0.2s;
+        }
+
+        .modal-close:hover {
+            background: var(--red)
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 24px
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1.5px solid var(--black);
+            color: var(--black);
+            font-family: var(--font-cond);
+            font-size: 12px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 12px 24px;
+            background: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: var(--black);
+            color: var(--white)
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--black);
+            color: var(--white)
+        }
+
+        .footer-top-bar {
+            background: #111;
+            padding: 32px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 24px;
+            border-bottom: 1px solid rgba(200, 16, 46, 0.35);
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px
+        }
+
+        .footer-brand img {
+            height: 32px;
+            filter: brightness(0) invert(1)
+        }
+
+        .footer-brand-name {
+            font-family: var(--font-cond);
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase
+        }
+
+        .footer-cta-strip {
+            display: flex;
+            align-items: center;
+            gap: 24px
+        }
+
+        .footer-call {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .footer-call i {
+            color: var(--red);
+            font-size: 18px
+        }
+
+        .footer-call div p:first-child {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.45);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-family: var(--font-cond)
+        }
+
+        .footer-call a {
+            font-family: var(--font-cond);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-call a:hover {
+            color: var(--red)
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 0;
+            padding: 56px 48px 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06)
+        }
+
+        .footer-col-brand {
+            padding-right: 48px
+        }
+
+        .footer-col-brand p {
+            font-size: 13px;
+            line-height: 1.75;
+            color: rgba(255, 255, 255, 0.4);
+            margin: 16px 0 28px;
+            font-weight: 300;
+            max-width: 280px
+        }
+
+        .social-row {
+            display: flex;
+            gap: 12px
+        }
+
+        .social-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .social-btn:hover {
+            background: var(--red);
+            border-color: var(--red);
+            color: var(--white)
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-cond);
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(200, 16, 46, 0.3);
+        }
+
+        .footer-col ul {
+            list-style: none
+        }
+
+        .footer-col ul li {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.45);
+            padding: 5px 0;
+            cursor: pointer;
+            transition: color 0.2s, padding-left 0.2s;
+        }
+
+        .footer-col ul li:hover {
+            color: var(--white);
+            padding-left: 6px
+        }
+
+        .footer-bottom {
+            padding: 20px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-bottom p {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.25);
+            letter-spacing: 0.05em
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px
+        }
+
+        .footer-bottom-links a {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.25);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.2s
+        }
+
+        .footer-bottom-links a:hover {
+            color: rgba(255, 255, 255, 0.6)
+        }
+
+        /* ── BACK TO TOP ── */
+        .back-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 44px;
+            height: 44px;
+            background: var(--red);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+            z-index: 900;
+            clip-path: polygon(50% 0%, 100% 50%, 85% 50%, 85% 100%, 15% 100%, 15% 50%, 0% 50%);
+        }
+
+        .back-top.show {
+            opacity: 1;
+            pointer-events: all
+        }
+
+        .back-top:hover {
+            background: var(--red-dark);
+            transform: translateY(-3px)
+        }
+
+        /* ── SCROLL REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.6s ease, transform 0.6s ease
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        /* ── MOBILE RESPONSIVE ── */
+        @media(max-width:1024px) {
+            .navbar {
+                padding: 0 28px
+            }
+
+            .hero {
+                padding: 0 28px 64px
+            }
+
+            .about-band {
+                padding: 48px 28px;
+                grid-template-columns: 1fr
+            }
+
+            .vehicles-section,
+            .news-section {
+                padding: 0 28px 60px
+            }
+
+            .stats-strip {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .stat-item:nth-child(2) {
+                border-right: none
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+                padding: 40px 28px
+            }
+
+            .footer-col-brand {
+                grid-column: 1/-1;
+                padding-right: 0
+            }
+
+            .footer-top-bar,
+            .footer-bottom {
+                padding: 28px
+            }
+
+            .section-header {
+                padding: 56px 28px 40px
+            }
+        }
+
+        @media(max-width:768px) {
+            .menu {
+                display: none
+            }
+
+            .hamburger {
+                display: flex
+            }
+
+            .mobile-menu {
+                display: block
+            }
+
+            .hero h1 {
+                font-size: min(14vw, 72px)
+            }
+
+            .hero {
+                padding: 0 20px 56px
+            }
+
+            .about-band {
+                padding: 40px 20px
+            }
+
+            .about-band h2 {
+                font-size: 40px
+            }
+
+            .stats-strip {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .stat-num {
+                font-size: 48px
+            }
+
+            .vehicles-section,
+            .news-section {
+                padding: 0 20px 56px
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+                padding: 36px 20px;
+                gap: 32px
+            }
+
+            .footer-col-brand {
+                grid-column: 1/-1
+            }
+
+            .footer-top-bar,
+            .footer-bottom {
+                padding: 20px
+            }
+
+            .footer-cta-strip {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px
+            }
+
+            .modal-body {
+                padding: 20px 20px 28px
+            }
+
+            .modal-body h2 {
+                font-size: 28px
+            }
+
+            .modal-specs {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .section-header {
+                padding: 48px 20px 32px
+            }
+
+            .section-header h2 {
+                font-size: min(12vw, 52px)
+            }
+
+            .hero-bg-text {
+                display: none
+            }
+        }
+
+        @media(max-width:480px) {
+            .navbar {
+                padding: 0 16px
+            }
+
+            .hero {
+                padding: 0 16px 48px;
+                min-height: 100svh
+            }
+
+            .stats-strip {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .stat-item {
+                padding: 32px 16px
+            }
+
+            .stat-num {
+                font-size: 38px
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                padding: 28px 16px
+            }
+
+            .footer-col-brand {
+                grid-column: auto
+            }
+
+            .footer-top-bar,
+            .footer-bottom {
+                padding: 16px
+            }
+
+            .modal-specs {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .about-band {
+                padding: 32px 16px
+            }
+
+            .vehicles-section,
+            .news-section {
+                padding: 0 16px 48px
+            }
+
+            .section-header {
+                padding: 40px 16px 28px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="logo-wrap">
+            <img src="mahindra.png" alt="Mahindra">
+           
+        </div>
+        <ul class="menu">
+            <p class="active">SUVs</p>
+            <p>eSUVs</p>
+            <p>Commercial Vehicles</p>
+        </ul>
+        <div class="nav-right">
+            <i class="fa-regular fa-user nav-icon" title="My Account"></i>
+            <i class="fa-regular fa-heart nav-icon" title="Saved"></i>
+            <div class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU DRAWER -->
+    <div class="mobile-menu" id="mobileMenu">
+        <p>SUVs</p>
+        <p>eSUVs</p>
+        <p>Commercial Vehicles</p>
+        <p>Explore All</p>
+        <p>Locate Dealer</p>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg-text">MAHINDRA</div>
+        <div class="hero-content">
+            <div class="hero-tag">Born in India. Built for the world.</div>
+            <h1>WE ARE<br><span>MAHINDRA</span></h1>
+            <p>Authentic SUVs engineered to explore the impossible — the finest in technology, design, safety, and
+                comfort.</p>
+            <div class="hero-cta">
+                <button class="btn-primary"
+                    onclick="document.getElementById('vehicles').scrollIntoView({behavior:'smooth'})">
+                    <i class="fa-solid fa-arrow-right"></i> Explore SUVs
+                </button>
+                <button class="btn-secondary"
+                    onclick="document.getElementById('news').scrollIntoView({behavior:'smooth'})">
+                    Latest News <i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT BAND -->
+    <div class="about-band reveal">
+        <div>
+            <h2>MADE IN<br>INDIA FOR<br>THE <span>WORLD</span></h2>
+        </div>
+        <div>
+            <p>For over 70 years, Mahindra has stood at the forefront of Indian automotive engineering. Our vehicles are
+                designed to conquer every terrain, crafted with precision for every customer — from city highways to the
+                most rugged wilderness. We don't just make SUVs. We make legends.</p>
+        </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-strip">
+        <div class="stat-item">
+            <span class="stat-num" data-target="941" data-suffix="K+">0K+</span>
+            <span class="stat-label">Units Sold in FY25</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-num" data-target="2.6" data-suffix="M+" data-decimal="true">0M+</span>
+            <span class="stat-label">Active Customers</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-num" data-target="10" data-suffix="K+">0K+</span>
+            <span class="stat-label">Strong Workforce</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-num" data-target="70" data-suffix="+">0+</span>
+            <span class="stat-label">Years of Legacy</span>
+        </div>
+    </div>
+
+    <!-- VEHICLES -->
+    <section id="vehicles">
+        <div class="section-header reveal">
+            <p class="section-tag">Our lineup</p>
+            <h2>EXPLORE THE RANGE</h2>
+        </div>
+        <div class="vehicles-section">
+            <div class="vehicle-grid" id="vehicleGrid">
+                <!-- cards injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWS -->
+    <section id="news">
+        <div class="section-header reveal">
+            <p class="section-tag">Newsroom</p>
+            <h2>LATEST FROM MAHINDRA</h2>
+        </div>
+        <div class="news-section">
+            <div class="news-grid" id="newsGrid"></div>
+        </div>
+    </section>
+
+    <!-- MODAL -->
+    <div class="modal-bg" id="modalBg" role="dialog" aria-modal="true">
+        <div class="modal" id="modal">
+            <button class="modal-close" id="modalClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+            <img id="modalImg" src="" alt="">
+            <div class="modal-body">
+                <p class="modal-tag" id="modalTag"></p>
+                <h2 id="modalTitle"></h2>
+                <p id="modalDesc"></p>
+                <div class="modal-specs" id="modalSpecs"></div>
+                <div class="modal-actions">
+                    <button class="btn-primary" onclick="alert('Book a test drive – coming soon!')"><i
+                            class="fa-solid fa-calendar"></i> Book Test Drive</button>
+                    <button class="btn-outline"><i class="fa-regular fa-file"></i> Download Brochure</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top-bar">
+            <div class="footer-brand">
+                <img src="mahindra.png" alt="Mahindra">
+                <span class="footer-brand-name">Mahindra Automotive</span>
+            </div>
+            <div class="footer-cta-strip">
+                <div class="footer-call">
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <p>Customer support</p>
+                        <a href="tel:18002096006">1800-209-6006</a>
+                    </div>
+                </div>
+                <div class="footer-call">
+                    <i class="fa-regular fa-envelope" style="color:var(--red);font-size:18px"></i>
+                    <div>
+                        <p>Email us</p>
+                        <a href="mailto:support@mahindra.com" style="font-size:15px">support@mahindra.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-main">
+            <div class="footer-col footer-col-brand">
+                <img src="mahindra.png" alt="Mahindra" style="height:28px;filter:brightness(0) invert(1)">
+                <p>We make authentic SUVs that help you explore the impossible — the finest in tech, design, safety and
+                    comfort. Made in India, for the world.</p>
+                <div class="social-row">
+                    <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-btn" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>SUVs</h4>
+                <ul>
+                    <li>XUV 7XO</li>
+                    <li>XUV 3XO EV</li>
+                    <li>Thar Roxx</li>
+                    <li>Scorpio-N</li>
+                    <li>XUV700</li>
+                    <li>XUV 3XO</li>
+                    <li>Thar</li>
+                    <li>XUV 400</li>
+                    <li>Scorpio Classic</li>
+                    <li>Bolero Neo</li>
+                    <li>Bolero</li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>eSUVs</h4>
+                <ul>
+                    <li>BE 6</li>
+                    <li>XEV 9e</li>
+                    <li>XEV 7e</li>
+                    <li>BE 9</li>
+                    <li>Upcoming EVs</li>
+                </ul>
+                <h4 style="margin-top:28px">Pik-Ups</h4>
+                <ul>
+                    <li>Veero</li>
+                    <li>Maxx City</li>
+                    <li>Maxx HD</li>
+                    <li>Bolero Pik-up</li>
+                    <li>Bolero Camper</li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li>About Mahindra</li>
+                    <li>Leadership Team</li>
+                    <li>Investor Relations</li>
+                    <li>Media Kit</li>
+                    <li>Careers</li>
+                    <li>CSR Initiatives</li>
+                    <li>QMS Certificate</li>
+                    <li>Awards</li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Owner Zone</h4>
+                <ul>
+                    <li>Service Centres</li>
+                    <li>Book a Service</li>
+                    <li>Adventure Trails</li>
+                    <li>Self-Service Guide</li>
+                    <li>Owner's Manual</li>
+                    <li>Extended Warranty</li>
+                    <li>Roadside Assist</li>
+                    <li>M-Care App</li>
+                </ul>
+                <h4 style="margin-top:28px">Buy / Finance</h4>
+                <ul>
+                    <li>Locate a Dealer</li>
+                    <li>EMI Calculator</li>
+                    <li>Trade-in / Exchange</li>
+                    <li>Insurance</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Mahindra & Mahindra Ltd. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Cookie Settings</a>
+                <a href="#">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-top" id="backTop" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
+
+    <script src="script.js"></script>
+        
+    </script>
+</body>
+
+</html>
